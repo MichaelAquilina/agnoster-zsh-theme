@@ -120,6 +120,16 @@ prompt_status() {
   [[ -n "$symbols" ]] && prompt_segment $PRIMARY_FG default " $symbols "
 }
 
+# Displays number of currently running containers
+prompt_containers() {
+  container_count="$(docker ps -q|wc -l)"
+  if [[ $container_count -ne 0 ]]; then
+    color=12
+    prompt_segment $color $PRIMARY_FG
+    print -Pn " $container_count "
+  fi
+}
+
 prompt_file_count() {
   file_count="$(ls -l|wc -l)"
   total_file_count="$(ls -lA|wc -l)"
@@ -151,6 +161,7 @@ prompt_agnoster_main() {
   prompt_status
   prompt_context
   prompt_virtualenv
+  prompt_containers
   prompt_dir
   prompt_file_count
   prompt_git
