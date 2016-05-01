@@ -123,8 +123,8 @@ prompt_status() {
 }
 
 prompt_file_count() {
-  file_count="$(ls -l|wc -l)"
-  total_file_count="$(ls -lA|wc -l)"
+  file_count="$(ls|wc -w)"
+  total_file_count="$(ls -A|wc -w)"
   hidden_file_count="$((total_file_count-file_count))"
 
   color=36
