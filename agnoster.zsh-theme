@@ -120,6 +120,21 @@ prompt_status() {
   [[ -n "$symbols" ]] && prompt_segment $PRIMARY_FG default " $symbols "
 }
 
+prompt_file_count() {
+  file_count="$(ls -l|wc -l)"
+  total_file_count="$(ls -lA|wc -l)"
+  hidden_file_count="$((total_file_count-file_count))"
+
+  color=36
+  prompt_segment $color $PRIMARY_FG
+
+  if [[ $hidden_file_count -ne 0 ]]; then
+    print -Pn " $file_count($hidden_file_count) "
+  else
+    print -Pn " $file_count "
+  fi
+}
+
 # Display current virtual environment
 prompt_virtualenv() {
   if [[ -n $VIRTUAL_ENV ]]; then
@@ -137,6 +152,7 @@ prompt_agnoster_main() {
   prompt_context
   prompt_virtualenv
   prompt_dir
+  prompt_file_count
   prompt_git
   prompt_end
 }
