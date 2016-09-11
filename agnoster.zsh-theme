@@ -140,9 +140,15 @@ prompt_file_count() {
 # Display current virtual environment
 prompt_virtualenv() {
   if [[ -n $VIRTUAL_ENV ]]; then
+    venv="$(basename $VIRTUAL_ENV)"
+    curdir="$(basename $PWD)"
     color=cyan
     prompt_segment $color $PRIMARY_FG
-    print -Pn " $(basename $VIRTUAL_ENV) "
+    if [[ "$venv" != "$curdir" ]]; then
+      print -Pn " $venv "
+    else
+      print -Pn " = "
+    fi
   fi
 }
 
