@@ -156,12 +156,12 @@ prompt_virtualenv() {
 prompt_agnoster_main() {
   RETVAL=$?
   CURRENT_BG='NONE'
-  prompt_status
-  prompt_context
-  prompt_virtualenv
-  prompt_dir
-  prompt_file_count
-  prompt_git
+  if [ -z "$AGNOSTER_DISABLE_STATUS" ]; then prompt_status; fi
+  if [ -z "$AGNOSTER_DISABLE_CONTEXT" ]; then prompt_context; fi
+  if [ -z "$AGNOSTER_DISABLE_VIRTUALENV" ]; then prompt_virtualenv; fi
+  if [ -z "$AGNOSTER_DISABLE_DIR" ]; then prompt_dir; fi
+  if [ -z "$AGNOSTER_DISABLE_FILE_COUNT" ]; then prompt_file_count; fi
+  if [ -z "$AGNOSTER_DISABLE_GIT" ]; then prompt_git; fi
   prompt_end
 }
 
